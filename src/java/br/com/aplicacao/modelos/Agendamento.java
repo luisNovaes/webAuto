@@ -51,7 +51,6 @@ public class Agendamento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cod_veiculo")
     private Veiculo veiculo;
-
     @OneToOne
     private Funcionario funcionarios;
 
@@ -106,14 +105,6 @@ public class Agendamento implements Serializable {
         this.observacao = observacao;
     }
 
-    public Veiculo getVeiculo() {
-        return veiculo;
-    }
-
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
-    }
-
     public Funcionario getFuncionarios() {
         return funcionarios;
     }
@@ -128,6 +119,14 @@ public class Agendamento implements Serializable {
 
     public void setPecas(Pecas pecas) {
         this.pecas = pecas;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     @Override

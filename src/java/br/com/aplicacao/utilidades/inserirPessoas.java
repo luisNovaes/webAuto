@@ -15,7 +15,8 @@ public abstract interface inserirPessoas {
 
     public static void main(String[] args) {
         PessoaDAO dao = new PessoaDAO();
-        dao.salvar();
+        //dao.salvar();
+        dao.buscarTodos();
 
     }
 }

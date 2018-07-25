@@ -51,6 +51,9 @@ public class Veiculo implements Serializable {
     private Pessoa propietario;
     @OneToMany(mappedBy = "veiculo")
     private List<Agendamento> agendamentos;
+    @ManyToOne
+    @JoinColumn(name = "cod_agendamento")
+    private Agendamento agendamento;
 
     public Long getIdVeiculo() {
         return idVeiculo;
@@ -122,6 +125,14 @@ public class Veiculo implements Serializable {
 
     public void setAgendamentos(List<Agendamento> agendamentos) {
         this.agendamentos = agendamentos;
+    }
+
+    public Agendamento getAgendamento() {
+        return agendamento;
+    }
+
+    public void setAgendamento(Agendamento agendamento) {
+        this.agendamento = agendamento;
     }
 
     @Override

@@ -9,8 +9,13 @@ import br.com.aplicacao.modelos.Agendamento;
 import br.com.aplicacao.modelos.Pecas;
 import br.com.aplicacao.utilidades.conexao;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -42,6 +47,41 @@ public class PecasDAO extends conexao {
             tx.rollback();
             System.out.println("Erro (" + e.getMessage()
                     + ") ao tentar inserir dados no banco");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+    }
+
+    public String buscarTodos() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            CriteriaBuilder builder = manager.getCriteriaBuilder();
+            CriteriaQuery<Pecas> criteriaQuery = builder.createQuery(Pecas.class);
+
+            Root<Pecas> pecas = criteriaQuery.from(Pecas.class);
+            criteriaQuery.select(pecas);
+
+            TypedQuery<Pecas> query = manager.createQuery(criteriaQuery);
+            List<Pecas> pecass = query.getResultList();
+
+            for (Pecas pe : pecass) {
+                System.out.println(+pe.getIdPeca() + " - "
+                        + pe.getNome() + " - "
+                        + pe.getModelo() + " - "
+                        + pe.getFabricante() + " - "
+                        + pe.getValorPeca() + " - "
+                        + pe.getObservacao()
+                );
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao consultar pessoa no banco!");
 
         } finally {
             manager.close();

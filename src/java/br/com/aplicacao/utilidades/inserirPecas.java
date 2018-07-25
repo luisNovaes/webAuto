@@ -16,7 +16,8 @@ public interface inserirPecas {
     public static void main(String[] args) {
 
         PecasDAO dao = new PecasDAO();
-        dao.salvar();
+        //dao.salvar();
+        dao.buscarTodos();
 
     }
 

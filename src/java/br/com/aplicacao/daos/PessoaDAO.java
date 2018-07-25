@@ -9,8 +9,13 @@ import br.com.aplicacao.modelos.Estado;
 import br.com.aplicacao.modelos.Pessoa;
 import br.com.aplicacao.modelos.TipoPessoa;
 import br.com.aplicacao.utilidades.conexao;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -42,11 +47,50 @@ public class PessoaDAO extends conexao {
         } catch (Exception e) {
             tx.rollback();
             System.out.println("Erro (" + e.getMessage()
-                    + ") ao tentar gravar no banco!");
+                    + ") ao tentar gravar Pessoa no banco!");
         } finally {
             manager.close();
             conexao.close();
 
+        }
+
+        return "Operação realizada com sucesso!";
+    }
+
+    public String buscarTodos() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            CriteriaBuilder builder = manager.getCriteriaBuilder();
+            CriteriaQuery<Pessoa> criteriaQuery = builder.createQuery(Pessoa.class);
+
+            Root<Pessoa> pessoa = criteriaQuery.from(Pessoa.class);
+            criteriaQuery.select(pessoa);
+
+            TypedQuery<Pessoa> query = manager.createQuery(criteriaQuery);
+            List<Pessoa> pessoas = query.getResultList();
+
+            for (Pessoa p : pessoas) {
+                System.out.println(p.getIdPessoa() + " - "
+                        + p.getNome() + " - "
+                        + p.getTipoPessoa() + " - "
+                        + p.getCpf_cnpj() + " - "
+                        + p.getEmail() + " - "
+                        + p.getTelefone() + " - "
+                        + p.getEndereco() + " - "
+                        + p.getCidade() + " - "
+                        + p.getEstado() + " - "
+                        + p.getObservacao()
+                );
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao consultar pessoa no banco!");
+
+        } finally {
+            manager.close();
+            conexao.close();
         }
 
         return "Operação realizada com sucesso!";

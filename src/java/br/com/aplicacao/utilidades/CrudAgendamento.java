@@ -5,18 +5,19 @@
  */
 package br.com.aplicacao.utilidades;
 
-import br.com.aplicacao.daos.VeiculoDAO;
+import br.com.aplicacao.daos.AgendamentoDAO;
 
 /**
  *
  * @author luis.silva
  */
-public interface inserirVeiculo {
+public interface CrudAgendamento {
 
     public static void main(String[] args) {
 
-        VeiculoDAO dao = new VeiculoDAO();
-        dao.salvar();
+        AgendamentoDAO dao = new AgendamentoDAO();
+        //dao.salvar();
+        dao.buscarTodos();
 
     }
 
