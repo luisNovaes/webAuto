@@ -5,19 +5,19 @@
  */
 package br.com.aplicacao.utilidades;
 
-import br.com.aplicacao.daos.FuncionarioDAO;
+import br.com.aplicacao.daos.FaturaDAO;
 
 /**
  *
  * @author luis.silva
  */
-public interface InserirFuncionario {
+public interface Crudfatura {
 
     public static void main(String[] args) {
 
-        FuncionarioDAO dao = new FuncionarioDAO();
-        dao.salvar();
-
+        FaturaDAO dao = new FaturaDAO();
+        //dao.salvar();
+        dao.buscarTodos();
     }
 
 }

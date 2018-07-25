@@ -70,7 +70,7 @@ public class PecasDAO extends conexao {
             List<Pecas> pecass = query.getResultList();
 
             for (Pecas pe : pecass) {
-                System.out.println(+pe.getIdPeca() + " - "
+                System.out.println(pe.getIdPeca() + " - "
                         + pe.getNome() + " - "
                         + pe.getModelo() + " - "
                         + pe.getFabricante() + " - "

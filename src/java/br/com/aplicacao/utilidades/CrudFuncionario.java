@@ -5,18 +5,20 @@
  */
 package br.com.aplicacao.utilidades;
 
-import br.com.aplicacao.daos.PessoaDAO;
+import br.com.aplicacao.daos.FuncionarioDAO;
 
 /**
  *
  * @author luis.silva
  */
-public abstract interface inserirPessoas {
+public interface CrudFuncionario {
 
     public static void main(String[] args) {
-        PessoaDAO dao = new PessoaDAO();
+
+        FuncionarioDAO dao = new FuncionarioDAO();
         //dao.salvar();
         dao.buscarTodos();
 
     }
+
 }

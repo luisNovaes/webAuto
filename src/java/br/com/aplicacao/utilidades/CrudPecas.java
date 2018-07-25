@@ -11,7 +11,7 @@ import br.com.aplicacao.daos.PecasDAO;
  *
  * @author luis.silva
  */
-public interface inserirPecas {
+public interface CrudPecas {
 
     public static void main(String[] args) {
 

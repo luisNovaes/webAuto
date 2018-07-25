@@ -5,18 +5,18 @@
  */
 package br.com.aplicacao.utilidades;
 
-import br.com.aplicacao.daos.FaturaDAO;
+import br.com.aplicacao.daos.PessoaDAO;
 
 /**
  *
  * @author luis.silva
  */
-public interface inserirfatura {
+public interface CrudPessoas {
 
     public static void main(String[] args) {
+        PessoaDAO dao = new PessoaDAO();
+        //dao.salvar();
+        dao.buscarTodos();
 
-        FaturaDAO dao = new FaturaDAO();
-        dao.salvar();
     }
-
 }

@@ -15,8 +15,13 @@ import br.com.aplicacao.modelos.Setor;
 import br.com.aplicacao.modelos.Turno;
 import br.com.aplicacao.utilidades.conexao;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -39,7 +44,6 @@ public class FuncionarioDAO extends conexao {
             funcionario.setFuncao(Funcao.GERENTE);
             funcionario.setEspecialidade(Especialidade.MECATRÔNICA);
             funcionario.setEscolaridade(Escolaridade.PÓS_GRADUADO);
-            funcionario.setDataNAscimento(new Date());
             funcionario.setDataAdminissao(new Date());
             funcionario.setDataDemissao(new Date());
             funcionario.setFilial(Filial.CUIABÁ);
@@ -54,6 +58,46 @@ public class FuncionarioDAO extends conexao {
         } catch (Exception e) {
             System.out.println("Erro ("
                     + ") ao tentar gravar no banco!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+    }
+
+    public String buscarTodos() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            CriteriaBuilder builder = manager.getCriteriaBuilder();
+            CriteriaQuery<Funcionario> criteriaQuery = builder.createQuery(Funcionario.class);
+
+            Root<Funcionario> funcionario = criteriaQuery.from(Funcionario.class);
+            criteriaQuery.select(funcionario);
+
+            TypedQuery<Funcionario> query = manager.createQuery(criteriaQuery);
+            List<Funcionario> funcionarios = query.getResultList();
+
+            for (Funcionario f : funcionarios) {
+                System.out.println(f.getIdfucionario() + " - "
+                        + f.getPessoa().getNome() + " - "
+                        + f.getPessoa().getDatabascimento() + " - "
+                        + f.getDataAdminissao() + " - "
+                        + f.getDataDemissao() + " - "
+                        + f.getEscolaridade() + " - "
+                        + f.getEspecialidade() + " - "
+                        + f.getFuncao() + " - "
+                        + f.getFilial() + " - "
+                        + f.getSetor() + " - "
+                        + f.getTurno()
+                );
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao consultar pessoa no banco!");
 
         } finally {
             manager.close();

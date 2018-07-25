@@ -6,6 +6,7 @@
 package br.com.aplicacao.modelos;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -33,6 +36,9 @@ public class Pessoa implements Serializable {
     private TipoPessoa tipoPessoa;
     @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date databascimento;
     @Column(nullable = false)
     private String cpf_cnpj;
     @Column(nullable = false)
@@ -71,6 +77,14 @@ public class Pessoa implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Date getDatabascimento() {
+        return databascimento;
+    }
+
+    public void setDatabascimento(Date databascimento) {
+        this.databascimento = databascimento;
     }
 
     public String getCpf_cnpj() {

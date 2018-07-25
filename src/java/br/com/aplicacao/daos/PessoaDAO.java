@@ -9,6 +9,7 @@ import br.com.aplicacao.modelos.Estado;
 import br.com.aplicacao.modelos.Pessoa;
 import br.com.aplicacao.modelos.TipoPessoa;
 import br.com.aplicacao.utilidades.conexao;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -32,6 +33,7 @@ public class PessoaDAO extends conexao {
         try {
             Pessoa pessoa = new Pessoa();
             pessoa.setNome("Marcos");
+            pessoa.setDatabascimento(new Date());
             pessoa.setTipoPessoa(TipoPessoa.FISICA);
             pessoa.setCpf_cnpj("123456789-12");
             pessoa.setEmail("fernando@gmail.com");
@@ -73,6 +75,7 @@ public class PessoaDAO extends conexao {
             for (Pessoa p : pessoas) {
                 System.out.println(p.getIdPessoa() + " - "
                         + p.getNome() + " - "
+                        + p.getDatabascimento() + " - "
                         + p.getTipoPessoa() + " - "
                         + p.getCpf_cnpj() + " - "
                         + p.getEmail() + " - "
