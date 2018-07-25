@@ -5,58 +5,19 @@
  */
 package br.com.aplicacao.utilidades;
 
-import br.com.aplicacao.modelos.Escolaridade;
-import br.com.aplicacao.modelos.Especialidade;
-import br.com.aplicacao.modelos.Filial;
-import br.com.aplicacao.modelos.Funcao;
-import br.com.aplicacao.modelos.Funcionario;
-import br.com.aplicacao.modelos.Pessoa;
-import br.com.aplicacao.modelos.Setor;
-import br.com.aplicacao.modelos.Turno;
-import java.util.Date;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import br.com.aplicacao.daos.FuncionarioDAO;
 
 /**
  *
  * @author luis.silva
  */
-public class InserirFuncionario {
+public interface InserirFuncionario {
 
     public static void main(String[] args) {
-        EntityManager manager = conexao.getEntityManager();
-        EntityTransaction tx = manager.getTransaction();
-        tx.begin();
 
-        try {
+        FuncionarioDAO dao = new FuncionarioDAO();
+        dao.salvar();
 
-            Pessoa pessoa = manager.find(Pessoa.class, 3L);
-
-            Funcionario funcionario = new Funcionario();
-
-            funcionario.setFuncao(Funcao.GERENTE);
-            funcionario.setEspecialidade(Especialidade.MECATRÔNICA);
-            funcionario.setEscolaridade(Escolaridade.PÓS_GRADUADO);
-            funcionario.setDataNAscimento(new Date());
-            funcionario.setDataAdminissao(new Date());
-            funcionario.setDataDemissao(new Date());
-            funcionario.setFilial(Filial.CUIABÁ);
-            funcionario.setRg("02125253-25");
-            funcionario.setSetor(Setor.SUPERVISAO);
-            funcionario.setTurno(Turno.ADM);
-            funcionario.setPessoa(pessoa);
-
-            manager.persist(funcionario);
-            tx.commit();
-
-        } catch (Exception e) {
-            System.out.println("Erro ("
-                    + ") ao tentar gravar no banco!");
-        } finally {
-            manager.close();
-            conexao.close();
-
-        }
     }
 
 }
