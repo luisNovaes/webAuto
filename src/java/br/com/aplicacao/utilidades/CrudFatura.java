@@ -11,13 +11,16 @@ import br.com.aplicacao.daos.FaturaDAO;
  *
  * @author luis.silva
  */
-public interface Crudfatura {
+public interface CrudFatura {
 
     public static void main(String[] args) {
 
         FaturaDAO dao = new FaturaDAO();
         //dao.salvar();
-        dao.buscarTodos();
+        //dao.buscarTodos();
+        //dao.buscarFaturaPelaOS();
+        //dao.buscarFaturaPelaStatusPG();
+        dao.buscarFaturaValorDoc();
     }
 
 }

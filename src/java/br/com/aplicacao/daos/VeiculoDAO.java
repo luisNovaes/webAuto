@@ -13,6 +13,7 @@ import br.com.aplicacao.utilidades.conexao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -24,7 +25,7 @@ import javax.persistence.criteria.Root;
  */
 public class VeiculoDAO extends conexao {
 
-    public String salvar() {
+    public String salvarVeiculos() {
 
         EntityManager manager = conexao.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
@@ -36,7 +37,7 @@ public class VeiculoDAO extends conexao {
 
             Veiculo veiculo = new Veiculo();
             veiculo.setPropietario(proprietario);
-            veiculo.setPlaca("DEF-1234");
+            veiculo.setPlaca("DAF-4534");
             veiculo.setTipoveiculo(TipoVeiculo.FROTISTA);
             veiculo.setMontadora(Montadora.VOLKSWAGEM);
             veiculo.setModelo("Gol");
@@ -59,7 +60,7 @@ public class VeiculoDAO extends conexao {
         return "Operação realizada com sucesso!";
     }
 
-    public String buscarTodos() {
+    public String buscarTodosVeiculos() {
         EntityManager manager = conexao.getEntityManager();
 
         try {
@@ -81,10 +82,12 @@ public class VeiculoDAO extends conexao {
                         + v.getMontadora() + " - "
                         + v.getAnoFabricacao() + " - "
                         + v.getPropietario().getNome() + " - "
-                        + v.getObservacao() + " - "
+                        + v.getPropietario().getRg() + " - "
+                        + v.getPropietario().getCpf_cnpj() + " - "
+                        + v.getPropietario().getTelefone() + " - "
                         + v.getAgendamento().getDataAgenda() + " - "
-                        + v.getAgendamento().getHoraAgenda()
-                );
+                        + v.getAgendamento().getHoraAgenda() + " - "
+                        + v.getObservacao());
             }
 
         } catch (Exception e) {
@@ -97,5 +100,99 @@ public class VeiculoDAO extends conexao {
         }
 
         return "Operação realizada com sucesso!";
+    }
+
+    public String buscarVeiculosPorNomeProprietario() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Veiculo where propietario.nome = :propietario");
+
+            query.setParameter("propietario", "Kawan");
+            List veiculos = query.getResultList();
+
+            if (veiculos.isEmpty()) {
+                System.out.println(
+                        "Pessoa não possui veículo cadastrado no sistema!");
+            } else {
+
+                for (Object obj : veiculos) {
+                    Veiculo v = (Veiculo) obj;
+                    System.out.println(v.getIdVeiculo() + " - "
+                            + v.getModelo() + " - "
+                            + v.getPlaca() + " - "
+                            + v.getAnoFabricacao() + " - "
+                            + v.getTipoveiculo() + " - "
+                            + v.getMontadora() + " - "
+                            + v.getAnoFabricacao() + " - "
+                            + v.getPropietario().getNome() + " - "
+                            + v.getPropietario().getRg() + " - "
+                            + v.getPropietario().getCpf_cnpj() + " - "
+                            + v.getPropietario().getTelefone() + " - "
+                            + v.getAgendamento().getDataAgenda() + " - "
+                            + v.getAgendamento().getHoraAgenda() + " - "
+                            + v.getObservacao());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarVeiculosPelaPlaca() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Veiculo where placa = :placa");
+
+            query.setParameter("placa", "DEF-1234");
+            List veiculos = query.getResultList();
+
+            if (veiculos.isEmpty()) {
+                System.out.println("Veículo não cadastrado com esta Placa!");
+            } else {
+
+                for (Object obj : veiculos) {
+                    Veiculo v = (Veiculo) obj;
+
+                    System.out.println(v.getIdVeiculo() + " - "
+                            + v.getModelo() + " - "
+                            + v.getPlaca() + " - "
+                            + v.getAnoFabricacao() + " - "
+                            + v.getTipoveiculo() + " - "
+                            + v.getMontadora() + " - "
+                            + v.getAnoFabricacao() + " - "
+                            + v.getPropietario().getNome() + " - "
+                            + v.getPropietario().getRg() + " - "
+                            + v.getPropietario().getCpf_cnpj() + " - "
+                            + v.getPropietario().getTelefone() + " - "
+                            + v.getAgendamento().getDataAgenda() + " - "
+                            + v.getAgendamento().getHoraAgenda() + " - "
+                            + v.getObservacao());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
     }
 }

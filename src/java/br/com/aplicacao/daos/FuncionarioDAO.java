@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -37,7 +38,7 @@ public class FuncionarioDAO extends conexao {
 
         try {
 
-            Pessoa pessoa = manager.find(Pessoa.class, 3L);
+            Pessoa pessoa = manager.find(Pessoa.class, 4L);
 
             Funcionario funcionario = new Funcionario();
 
@@ -47,7 +48,6 @@ public class FuncionarioDAO extends conexao {
             funcionario.setDataAdminissao(new Date());
             funcionario.setDataDemissao(new Date());
             funcionario.setFilial(Filial.CUIABÁ);
-            funcionario.setRg("02125253-25");
             funcionario.setSetor(Setor.SUPERVISAO);
             funcionario.setTurno(Turno.ADM);
             funcionario.setPessoa(pessoa);
@@ -83,7 +83,16 @@ public class FuncionarioDAO extends conexao {
             for (Funcionario f : funcionarios) {
                 System.out.println(f.getIdfucionario() + " - "
                         + f.getPessoa().getNome() + " - "
+                        + f.getPessoa().getRg() + " - "
+                        + f.getPessoa().getCpf_cnpj() + " "
                         + f.getPessoa().getDatabascimento() + " - "
+                        + f.getPessoa().getTelefone() + " - "
+                        + f.getPessoa().getEmail() + " - "
+                        + f.getPessoa().getEndereco() + " - "
+                        + f.getPessoa().getCidade() + " - "
+                        + f.getPessoa().getEstado() + " - "
+                        + f.getPessoa().getTipoPessoa() + " - "
+                        + f.getPessoa().getObservacao() + " - "
                         + f.getDataAdminissao() + " - "
                         + f.getDataDemissao() + " - "
                         + f.getEscolaridade() + " - "
@@ -105,6 +114,271 @@ public class FuncionarioDAO extends conexao {
         }
 
         return "Operação realizada com sucesso!";
+    }
+
+    public String buscarFuncionarioPeloNome() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Funcionario where pessoa.nome = :nome");
+
+            query.setParameter("nome", "Maria");
+            List funcionarios = query.getResultList();
+
+            if (funcionarios.isEmpty()) {
+                System.out.println("Não há Funcionario não cadastrado com este Nome!");
+            } else {
+
+                for (Object obj : funcionarios) {
+                    Funcionario f = (Funcionario) obj;
+                    System.out.println(f.getIdfucionario() + " - "
+                            + f.getPessoa().getNome() + " - "
+                            + f.getPessoa().getRg() + " - "
+                            + f.getPessoa().getCpf_cnpj() + " "
+                            + f.getPessoa().getDatabascimento() + " - "
+                            + f.getPessoa().getTelefone() + " - "
+                            + f.getPessoa().getEmail() + " - "
+                            + f.getPessoa().getEndereco() + " - "
+                            + f.getPessoa().getCidade() + " - "
+                            + f.getPessoa().getEstado() + " - "
+                            + f.getPessoa().getTipoPessoa() + " - "
+                            + f.getPessoa().getObservacao() + " - "
+                            + f.getDataAdminissao() + " - "
+                            + f.getDataDemissao() + " - "
+                            + f.getEscolaridade() + " - "
+                            + f.getEspecialidade() + " - "
+                            + f.getFuncao() + " - "
+                            + f.getFilial() + " - "
+                            + f.getSetor() + " - "
+                            + f.getTurno()
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarFuncionarioPelaFuncao() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Funcionario where funcao = :funcao");
+
+            query.setParameter("funcao", Funcao.GERENTE);
+            List funcionarios = query.getResultList();
+
+            if (funcionarios.isEmpty()) {
+                System.out.println("Não há Funcionario cadastrado com esta funçao!");
+            } else {
+
+                for (Object obj : funcionarios) {
+                    Funcionario f = (Funcionario) obj;
+                    System.out.println(f.getIdfucionario() + " - "
+                            + f.getPessoa().getNome() + " - "
+                            + f.getPessoa().getRg() + " - "
+                            + f.getPessoa().getCpf_cnpj() + " "
+                            + f.getPessoa().getDatabascimento() + " - "
+                            + f.getPessoa().getTelefone() + " - "
+                            + f.getPessoa().getEmail() + " - "
+                            + f.getPessoa().getEndereco() + " - "
+                            + f.getPessoa().getCidade() + " - "
+                            + f.getPessoa().getEstado() + " - "
+                            + f.getPessoa().getTipoPessoa() + " - "
+                            + f.getPessoa().getObservacao() + " - "
+                            + f.getDataAdminissao() + " - "
+                            + f.getDataDemissao() + " - "
+                            + f.getEscolaridade() + " - "
+                            + f.getEspecialidade() + " - "
+                            + f.getFuncao() + " - "
+                            + f.getFilial() + " - "
+                            + f.getSetor() + " - "
+                            + f.getTurno()
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarFuncionarioPelaFilial() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Funcionario where filial = :filial");
+
+            query.setParameter("filial", Filial.TANGARÁ);
+            List funcionarios = query.getResultList();
+
+            if (funcionarios.isEmpty()) {
+                System.out.println("Não há Funcionario cadastrado nesta filial!");
+            } else {
+
+                for (Object obj : funcionarios) {
+                    Funcionario f = (Funcionario) obj;
+                    System.out.println(f.getIdfucionario() + " - "
+                            + f.getPessoa().getNome() + " - "
+                            + f.getPessoa().getRg() + " - "
+                            + f.getPessoa().getCpf_cnpj() + " "
+                            + f.getPessoa().getDatabascimento() + " - "
+                            + f.getPessoa().getTelefone() + " - "
+                            + f.getPessoa().getEmail() + " - "
+                            + f.getPessoa().getEndereco() + " - "
+                            + f.getPessoa().getCidade() + " - "
+                            + f.getPessoa().getEstado() + " - "
+                            + f.getPessoa().getTipoPessoa() + " - "
+                            + f.getPessoa().getObservacao() + " - "
+                            + f.getDataAdminissao() + " - "
+                            + f.getDataDemissao() + " - "
+                            + f.getEscolaridade() + " - "
+                            + f.getEspecialidade() + " - "
+                            + f.getFuncao() + " - "
+                            + f.getFilial() + " - "
+                            + f.getSetor() + " - "
+                            + f.getTurno()
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarFuncionarioPeloRG() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Funcionario where pessoa.rg = :pessoa");
+
+            query.setParameter("pessoa", "2234565-58");
+            List funcionarios = query.getResultList();
+
+            if (funcionarios.isEmpty()) {
+                System.out.println("Não há Funcionario cadastrado com este RG!");
+            } else {
+
+                for (Object obj : funcionarios) {
+                    Funcionario f = (Funcionario) obj;
+                    System.out.println(f.getIdfucionario() + " - "
+                            + f.getPessoa().getNome() + " - "
+                            + f.getPessoa().getRg() + " - "
+                            + f.getPessoa().getCpf_cnpj() + " "
+                            + f.getPessoa().getDatabascimento() + " - "
+                            + f.getPessoa().getTelefone() + " - "
+                            + f.getPessoa().getEmail() + " - "
+                            + f.getPessoa().getEndereco() + " - "
+                            + f.getPessoa().getCidade() + " - "
+                            + f.getPessoa().getEstado() + " - "
+                            + f.getPessoa().getTipoPessoa() + " - "
+                            + f.getPessoa().getObservacao() + " - "
+                            + f.getDataAdminissao() + " - "
+                            + f.getDataDemissao() + " - "
+                            + f.getEscolaridade() + " - "
+                            + f.getEspecialidade() + " - "
+                            + f.getFuncao() + " - "
+                            + f.getFilial() + " - "
+                            + f.getSetor() + " - "
+                            + f.getTurno()
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarFuncionarioPeloCpfCnpj() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Funcionario where pessoa.cpf_cnpj = :cpf_cnpj");
+
+            query.setParameter("cpf_cnpj", "123456789-12");
+            List funcionarios = query.getResultList();
+
+            if (funcionarios.isEmpty()) {
+                System.out.println("Não há Colaborador cadastrado com este CPF ou CNPJ!");
+            } else {
+
+                for (Object obj : funcionarios) {
+                    Funcionario f = (Funcionario) obj;
+                    System.out.println(f.getIdfucionario() + " - "
+                            + f.getPessoa().getNome() + " - "
+                            + f.getPessoa().getRg() + " - "
+                            + f.getPessoa().getCpf_cnpj() + " "
+                            + f.getPessoa().getDatabascimento() + " - "
+                            + f.getPessoa().getTelefone() + " - "
+                            + f.getPessoa().getEmail() + " - "
+                            + f.getPessoa().getEndereco() + " - "
+                            + f.getPessoa().getCidade() + " - "
+                            + f.getPessoa().getEstado() + " - "
+                            + f.getPessoa().getTipoPessoa() + " - "
+                            + f.getPessoa().getObservacao() + " - "
+                            + f.getDataAdminissao() + " - "
+                            + f.getDataDemissao() + " - "
+                            + f.getEscolaridade() + " - "
+                            + f.getEspecialidade() + " - "
+                            + f.getFuncao() + " - "
+                            + f.getFilial() + " - "
+                            + f.getSetor() + " - "
+                            + f.getTurno()
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
     }
 
 }

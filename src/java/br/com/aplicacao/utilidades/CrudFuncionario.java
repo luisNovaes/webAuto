@@ -16,8 +16,13 @@ public interface CrudFuncionario {
     public static void main(String[] args) {
 
         FuncionarioDAO dao = new FuncionarioDAO();
-        //dao.salvar();
-        dao.buscarTodos();
+        // dao.salvar();
+        //dao.buscarTodos();
+        //dao.buscarFuncionarioPeloNome();
+        //dao.buscarFuncionarioPelaFuncao();
+        //dao.buscarFuncionarioPelaFilial();
+        //dao.buscarFuncionarioPeloRG();
+        //dao.buscarFuncionarioPeloCpfCnpj();
 
     }
 

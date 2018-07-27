@@ -16,7 +16,9 @@ public interface CrudPessoas {
     public static void main(String[] args) {
         PessoaDAO dao = new PessoaDAO();
         //dao.salvar();
-        dao.buscarTodos();
-
+        //dao.buscarTodos();
+        //dao.buscarPorNome();
+        dao.buscarPorCpfCnpj();
+        //dao.buscarPorRg();
     }
 }

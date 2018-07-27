@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -34,6 +35,7 @@ public class PessoaDAO extends conexao {
             Pessoa pessoa = new Pessoa();
             pessoa.setNome("Marcos");
             pessoa.setDatabascimento(new Date());
+            pessoa.setRg("045865258-55");
             pessoa.setTipoPessoa(TipoPessoa.FISICA);
             pessoa.setCpf_cnpj("123456789-12");
             pessoa.setEmail("fernando@gmail.com");
@@ -76,6 +78,7 @@ public class PessoaDAO extends conexao {
                 System.out.println(p.getIdPessoa() + " - "
                         + p.getNome() + " - "
                         + p.getDatabascimento() + " - "
+                        + p.getRg() + " - "
                         + p.getTipoPessoa() + " - "
                         + p.getCpf_cnpj() + " - "
                         + p.getEmail() + " - "
@@ -97,6 +100,138 @@ public class PessoaDAO extends conexao {
         }
 
         return "Operação realizada com sucesso!";
+    }
+
+    public String buscarPorNome() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Pessoa where nome = :nome");
+
+            query.setParameter("nome", "Kawan");
+            List pessoas = query.getResultList();
+
+            if (pessoas.isEmpty()) {
+                System.out.println("Pessoa não cadastrada!");
+            } else {
+
+                for (Object obj : pessoas) {
+                    Pessoa p = (Pessoa) obj;
+
+                    System.out.println(p.getIdPessoa() + " -"
+                            + p.getNome() + " - "
+                            + p.getRg() + " - "
+                            + p.getCpf_cnpj() + " - "
+                            + p.getTelefone() + " - "
+                            + p.getEmail() + " - "
+                            + p.getDatabascimento() + " - "
+                            + p.getEndereco() + " - "
+                            + p.getCidade() + " - "
+                            + p.getEstado() + " - "
+                            + p.getObservacao());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarPorCpfCnpj() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Pessoa where cpf_cnpj = :cpf_cnpj");
+
+            query.setParameter("cpf_cnpj", "123456789-12");
+            List pessoas = query.getResultList();
+
+            if (pessoas.isEmpty()) {
+                System.out.println("CPF ou CNPJ não cadastrado!");
+            } else {
+
+                for (Object obj : pessoas) {
+                    Pessoa p = (Pessoa) obj;
+
+                    System.out.println(p.getIdPessoa() + " -"
+                            + p.getNome() + " - "
+                            + p.getRg() + " - "
+                            + p.getCpf_cnpj() + " - "
+                            + p.getTelefone() + " - "
+                            + p.getEmail() + " - "
+                            + p.getDatabascimento() + " - "
+                            + p.getEndereco() + " - "
+                            + p.getCidade() + " - "
+                            + p.getEstado() + " - "
+                            + p.getObservacao());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarPorRg() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Pessoa where rg= :rg");
+
+            query.setParameter("rg", "1234565-58");
+            List pessoas = query.getResultList();
+
+            if (pessoas.isEmpty()) {
+                System.out.println("RG não cadastrado!");
+            } else {
+
+                for (Object obj : pessoas) {
+                    Pessoa p = (Pessoa) obj;
+
+                    System.out.println(p.getIdPessoa() + " -"
+                            + p.getNome() + " - "
+                            + p.getRg() + " - "
+                            + p.getCpf_cnpj() + " - "
+                            + p.getTelefone() + " - "
+                            + p.getEmail() + " - "
+                            + p.getDatabascimento() + " - "
+                            + p.getEndereco() + " - "
+                            + p.getCidade() + " - "
+                            + p.getEstado() + " - "
+                            + p.getObservacao());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
     }
 
 }

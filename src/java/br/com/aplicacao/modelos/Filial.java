@@ -13,6 +13,7 @@ public enum Filial {
 
     CUIABÁ,
     PRIMAVERA,
-    TANGARÁ
+    TANGARÁ,
+    SORRISO
 
 }

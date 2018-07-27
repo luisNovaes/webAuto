@@ -6,6 +6,7 @@
 package br.com.aplicacao.utilidades;
 
 import br.com.aplicacao.daos.AgendamentoDAO;
+import java.text.ParseException;
 
 /**
  *
@@ -13,11 +14,13 @@ import br.com.aplicacao.daos.AgendamentoDAO;
  */
 public interface CrudAgendamento {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         AgendamentoDAO dao = new AgendamentoDAO();
         //dao.salvar();
-        dao.buscarTodos();
+        //dao.buscarTodos();
+        //dao.buscarAgendamentoPorData();
+        dao.buscarAgendamentoPorHora();
 
     }
 

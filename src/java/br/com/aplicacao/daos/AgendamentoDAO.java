@@ -13,10 +13,13 @@ import br.com.aplicacao.modelos.TipoServico;
 import br.com.aplicacao.modelos.Veiculo;
 import br.com.aplicacao.utilidades.conexao;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -36,7 +39,7 @@ public class AgendamentoDAO extends conexao {
 
         try {
 
-            Funcionario funcionario = manager.find(Funcionario.class, 2L);
+            Funcionario funcionario = manager.find(Funcionario.class, 5L);
             Pecas pecas = manager.find(Pecas.class, 3L);
             Veiculo veiculo = manager.find(Veiculo.class, 3L);
 
@@ -47,9 +50,9 @@ public class AgendamentoDAO extends conexao {
             agenda.setHoraAgenda(HoraAgenda.manha);
             agenda.setFuncionarios(funcionario);
             agenda.setPecas(pecas);
-            agenda.setTipoServico(TipoServico.ÉLETRICO);
-            agenda.setValorTotalServico(new BigDecimal(1000));
-            agenda.setObservacao("veiculo em garantia");
+            agenda.setTipoServico(TipoServico.LIMPEZA);
+            agenda.setValorTotalServico(new BigDecimal(200));
+            agenda.setObservacao("Fazer orçamento de troca de bateria");
 
             manager.persist(agenda);
             tx.commit();
@@ -106,6 +109,102 @@ public class AgendamentoDAO extends conexao {
         }
 
         return "Operação realizada com sucesso!";
+    }
+
+    public String buscarAgendamentoPorData() throws ParseException {
+        EntityManager manager = conexao.getEntityManager();
+
+        SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
+        String userdata = "2018-07-21";
+        Date novadata = data.parse(userdata);
+
+        try {
+            Query query = manager.createQuery(
+                    " from Agendamento where dataAgenda = :dataAgenda");
+
+            query.setParameter("dataAgenda", novadata);
+            List Agendamento = query.getResultList();
+
+            if (Agendamento.isEmpty()) {
+                System.out.println("Não há Agendamento cadastrado para este data!");
+            } else {
+
+                for (Object obj : Agendamento) {
+                    Agendamento a = (Agendamento) obj;
+                    System.out.println(a.getDataAgenda() + " - "
+                            + a.getHoraAgenda() + " - "
+                            + a.getVeiculo().getPlaca() + " - "
+                            + a.getVeiculo().getPropietario().getNome() + " - "
+                            + a.getVeiculo().getPropietario().getCpf_cnpj() + " - "
+                            + a.getVeiculo().getPropietario().getTelefone() + " - "
+                            + a.getVeiculo().getPropietario().getEmail() + " - "
+                            + a.getTipoServico() + " - "
+                            + a.getFuncionarios().getPessoa().getNome() + " - "
+                            + a.getPecas().getNome() + " - "
+                            + a.getValorTotalServico() + " - "
+                            + a.getObservacao().toUpperCase());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarAgendamentoPorHora() throws ParseException {
+        EntityManager manager = conexao.getEntityManager();
+
+        SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
+        String userdata = "2018-07-21";
+        Date novadata = data.parse(userdata);
+
+        try {
+            Query query = manager.createQuery(
+                    " from Agendamento where horaAgenda = :horaAgenda");
+
+            query.setParameter("horaAgenda", HoraAgenda.noite);
+            List Agendamento = query.getResultList();
+
+            if (Agendamento.isEmpty()) {
+                System.out.println("Não há Agendamento cadastrado para este horário!");
+            } else {
+
+                for (Object obj : Agendamento) {
+                    Agendamento a = (Agendamento) obj;
+                    System.out.println(a.getDataAgenda() + " - "
+                            + a.getHoraAgenda() + " - "
+                            + a.getVeiculo().getPlaca() + " - "
+                            + a.getVeiculo().getPropietario().getNome() + " - "
+                            + a.getVeiculo().getPropietario().getCpf_cnpj() + " - "
+                            + a.getVeiculo().getPropietario().getTelefone() + " - "
+                            + a.getVeiculo().getPropietario().getEmail() + " - "
+                            + a.getTipoServico() + " - "
+                            + a.getFuncionarios().getPessoa().getNome() + " - "
+                            + a.getPecas().getNome() + " - "
+                            + a.getValorTotalServico() + " - "
+                            + a.getObservacao().toUpperCase());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
     }
 
 }

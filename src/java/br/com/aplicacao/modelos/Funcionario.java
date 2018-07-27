@@ -38,8 +38,6 @@ public class Funcionario implements Serializable {
     @Enumerated(EnumType.STRING)
     private Funcao funcao;
     @Column(nullable = false)
-    private String rg;
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Escolaridade Escolaridade;
     @Column(nullable = false)
@@ -84,14 +82,6 @@ public class Funcionario implements Serializable {
 
     public void setFuncao(Funcao funcao) {
         this.funcao = funcao;
-    }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
     }
 
     public Escolaridade getEscolaridade() {
@@ -168,7 +158,7 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "Funcionario{" + "idfucionario=" + idfucionario + ", funcao=" + funcao + ", rg=" + rg + ", Escolaridade=" + Escolaridade + ", especialidade=" + especialidade + ", dataAdminissao=" + dataAdminissao + ", dataDemissao=" + dataDemissao + ", filial=" + filial + ", setor=" + setor + ", turno=" + turno + ", agendamento=" + agendamento + ", pessoa=" + pessoa + '}';
+        return "Funcionario{" + "idfucionario=" + idfucionario + ", funcao=" + funcao + ", Escolaridade=" + Escolaridade + ", especialidade=" + especialidade + ", dataAdminissao=" + dataAdminissao + ", dataDemissao=" + dataDemissao + ", filial=" + filial + ", setor=" + setor + ", turno=" + turno + ", agendamento=" + agendamento + ", pessoa=" + pessoa + '}';
     }
 
     @Override

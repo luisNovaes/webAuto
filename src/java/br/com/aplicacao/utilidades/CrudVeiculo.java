@@ -16,9 +16,10 @@ public interface CrudVeiculo {
     public static void main(String[] args) {
 
         VeiculoDAO dao = new VeiculoDAO();
-        //dao.salvar();
-        dao.buscarTodos();
-
+        //dao.salvarVeiculos();
+        //dao.buscarTodosVeiculos();
+        //dao.buscarVeiculosPorNomeProprietario();
+        dao.buscarVeiculosPelaPlaca();
     }
 
 }

@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -69,17 +70,21 @@ public class FaturaDAO extends conexao {
             TypedQuery<Fatura> query = manager.createQuery(criteriaQuery);
             List<Fatura> faturas = query.getResultList();
 
-            for (Fatura fa : faturas) {
-                System.out.println(fa.getCodDocumento() + " - "
-                        + fa.getAgendamento().getVeiculo().getPlaca() + " - "
-                        + fa.getAgendamento().getVeiculo().getPropietario().getNome() + " - "
-                        + fa.getAgendamento().getIdOS() + " - "
-                        + fa.getAgendamento().getTipoServico() + " - "
-                        + fa.getAgendamento().getPecas().getNome() + " - "
-                        + fa.getAgendamento().getFuncionarios().getPessoa().getNome() + " - "
-                        + fa.getAgendamento().getValorTotalServico() + " - "
-                        + fa.getValorTotDoc() + " - "
-                        + fa.getStatusDoc());
+            for (Fatura f : faturas) {
+                System.out.println(f.getCodDocumento() + " - "
+                        + f.getAgendamento().getVeiculo().getAgendamento().getIdOS() + " - "
+                        + f.getAgendamento().getVeiculo().getPlaca() + " - "
+                        + f.getAgendamento().getVeiculo().getPropietario().getNome() + " - "
+                        + f.getAgendamento().getVeiculo().getPropietario().getRg() + " - "
+                        + f.getAgendamento().getVeiculo().getPropietario().getCpf_cnpj() + " - "
+                        + f.getAgendamento().getFuncionarios().getPessoa().getNome() + " - "
+                        + f.getAgendamento().getTipoServico() + " - "
+                        + f.getAgendamento().getPecas().getNome() + " - "
+                        + f.getAgendamento().getValorTotalServico() + " - "
+                        + f.getValorTotDoc() + " - "
+                        + f.getStatusDoc() + " - "
+                        + f.getAgendamento().getObservacao()
+                );
             }
 
         } catch (Exception e) {
@@ -92,5 +97,146 @@ public class FaturaDAO extends conexao {
         }
 
         return "Operação realizada com sucesso!";
+    }
+
+    public String buscarFaturaPelaOS() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Fatura where agendamento.idOS = :agendamento");
+
+            query.setParameter("agendamento", 1L);
+            List faturas = query.getResultList();
+
+            if (faturas.isEmpty()) {
+                System.out.println(
+                        "Fatura existe no sistema!");
+            } else {
+
+                for (Object obj : faturas) {
+                    Fatura f = (Fatura) obj;
+                    System.out.println(f.getCodDocumento() + " - "
+                            + f.getAgendamento().getVeiculo().getAgendamento().getIdOS() + " - "
+                            + f.getAgendamento().getVeiculo().getPlaca() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getNome() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getRg() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getCpf_cnpj() + " - "
+                            + f.getAgendamento().getFuncionarios().getPessoa().getNome() + " - "
+                            + f.getAgendamento().getTipoServico() + " - "
+                            + f.getAgendamento().getPecas().getNome() + " - "
+                            + f.getAgendamento().getValorTotalServico() + " - "
+                            + f.getValorTotDoc() + " - "
+                            + f.getStatusDoc() + " - "
+                            + f.getAgendamento().getObservacao()
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Fatura!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarFaturaPelaStatusPG() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Fatura where StatusDoc = :StatusDoc");
+
+            query.setParameter("StatusDoc", StatusDoc.PAGO);
+            List faturas = query.getResultList();
+
+            if (faturas.isEmpty()) {
+                System.out.println(
+                        "Fatura existe no sistema!");
+            } else {
+
+                for (Object obj : faturas) {
+                    Fatura f = (Fatura) obj;
+                    System.out.println(f.getCodDocumento() + " - "
+                            + f.getAgendamento().getVeiculo().getAgendamento().getIdOS() + " - "
+                            + f.getAgendamento().getVeiculo().getPlaca() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getNome() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getRg() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getCpf_cnpj() + " - "
+                            + f.getAgendamento().getFuncionarios().getPessoa().getNome() + " - "
+                            + f.getAgendamento().getTipoServico() + " - "
+                            + f.getAgendamento().getPecas().getNome() + " - "
+                            + f.getAgendamento().getValorTotalServico() + " - "
+                            + f.getValorTotDoc() + " - "
+                            + f.getStatusDoc() + " - "
+                            + f.getAgendamento().getObservacao()
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Fatura!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarFaturaValorDoc() {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Fatura where valorTotDoc = :valorTotDoc");
+
+            query.setParameter("valorTotDoc", new BigDecimal(400));
+            List faturas = query.getResultList();
+
+            if (faturas.isEmpty()) {
+                System.out.println(
+                        "Valor de faatura nao existe no sistema!");
+            } else {
+
+                for (Object obj : faturas) {
+                    Fatura f = (Fatura) obj;
+                    System.out.println(f.getCodDocumento() + " - "
+                            + f.getAgendamento().getVeiculo().getAgendamento().getIdOS() + " - "
+                            + f.getAgendamento().getVeiculo().getPlaca() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getNome() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getRg() + " - "
+                            + f.getAgendamento().getVeiculo().getPropietario().getCpf_cnpj() + " - "
+                            + f.getAgendamento().getFuncionarios().getPessoa().getNome() + " - "
+                            + f.getAgendamento().getTipoServico() + " - "
+                            + f.getAgendamento().getPecas().getNome() + " - "
+                            + f.getAgendamento().getValorTotalServico() + " - "
+                            + f.getValorTotDoc() + " - "
+                            + f.getStatusDoc() + " - "
+                            + f.getAgendamento().getObservacao()
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Fatura!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
     }
 }

@@ -40,6 +40,8 @@ public class Pessoa implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date databascimento;
     @Column(nullable = false)
+    private String rg;
+    @Column(nullable = false)
     private String cpf_cnpj;
     @Column(nullable = false)
     private String email;
@@ -85,6 +87,14 @@ public class Pessoa implements Serializable {
 
     public void setDatabascimento(Date databascimento) {
         this.databascimento = databascimento;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
     public String getCpf_cnpj() {
@@ -145,7 +155,7 @@ public class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "idPessoa=" + idPessoa + ", tipoPessoa=" + tipoPessoa + ", nome=" + nome + ", cpf_cnpj=" + cpf_cnpj + ", email=" + email + ", telefone=" + telefone + ", Endereco=" + Endereco + ", Cidade=" + Cidade + ", estado=" + estado + ", observacao=" + observacao + '}';
+        return "Pessoa{" + "idPessoa=" + idPessoa + ", tipoPessoa=" + tipoPessoa + ", nome=" + nome + ", databascimento=" + databascimento + ", rg=" + rg + ", cpf_cnpj=" + cpf_cnpj + ", email=" + email + ", telefone=" + telefone + ", Endereco=" + Endereco + ", Cidade=" + Cidade + ", estado=" + estado + ", observacao=" + observacao + '}';
     }
 
     @Override
