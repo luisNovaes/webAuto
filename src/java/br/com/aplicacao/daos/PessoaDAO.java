@@ -33,7 +33,7 @@ public class PessoaDAO extends conexao {
 
         try {
             Pessoa pessoa = new Pessoa();
-            pessoa.setNome("Marcos");
+            pessoa.setNome("Alana");
             pessoa.setDatabascimento(new Date());
             pessoa.setRg("045865258-55");
             pessoa.setTipoPessoa(TipoPessoa.FISICA);
@@ -234,4 +234,191 @@ public class PessoaDAO extends conexao {
 
     }
 
+    public String AtualizarPessoaTelefone() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Pessoa pessoa = manager.find(Pessoa.class, 2L);
+
+        System.out.println("Telefone atual: " + pessoa.getTelefone());
+        pessoa.setTelefone("(88)888888888");
+        System.out.println("Novo telefone: " + pessoa.getTelefone());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarPessoaEndereco() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Pessoa pessoa = manager.find(Pessoa.class, 2L);
+
+        System.out.println("Endereço atual: " + pessoa.getEndereco());
+        pessoa.setEndereco("Rua do eclipse lunar de 2018, numero 0001");
+        System.out.println("Novo endereço: " + pessoa.getEndereco());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarPessoaEmail() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Pessoa pessoa = manager.find(Pessoa.class, 2L);
+
+        System.out.println("Email atual: " + pessoa.getEmail());
+        pessoa.setEmail("emailatualizado@gmail.com");
+        System.out.println("Novo email: " + pessoa.getEmail());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarPessoaCidade() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Pessoa pessoa = manager.find(Pessoa.class, 2L);
+
+        System.out.println("Email atual: " + pessoa.getCidade());
+        pessoa.setCidade("Maceió");
+        System.out.println("Novo email: " + pessoa.getCidade());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarPessoaEstado() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Pessoa pessoa = manager.find(Pessoa.class, 2L);
+
+        System.out.println("Email atual: " + pessoa.getEstado());
+        pessoa.setEstado(Estado.AL);
+        System.out.println("Novo email: " + pessoa.getEstado());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarPessoaObservacao() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Pessoa pessoa = manager.find(Pessoa.class, 2L);
+
+        System.out.println("Email atual: " + pessoa.getObservacao());
+        pessoa.setObservacao("Esta pessoa mudou para Maceió");
+        System.out.println("Novo email: " + pessoa.getObservacao());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar pessoa!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String ExcluirPessoa() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        long id = 6L;
+
+        try {
+            Pessoa pessoa = manager.find(Pessoa.class, id);
+            manager.remove(pessoa);
+            tx.commit();
+            System.out.println(" Pessoa excluida com sucesso!");
+
+        } catch (Exception e) {
+
+            System.out.println("Esta pessoa não pode ser excluida, "
+                    + "pos está vinculada a algum cadastro ou não existe no sistema!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+    }
 }

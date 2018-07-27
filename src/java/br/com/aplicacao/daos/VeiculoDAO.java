@@ -195,4 +195,221 @@ public class VeiculoDAO extends conexao {
         return "Operação realizada com sucesso!";
 
     }
+
+    public String AtualizarObservacaoVeiculo() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Veiculo veiculo = manager.find(Veiculo.class, 2L);
+
+        System.out.println("Observaçao atual: " + veiculo.getObservacao());
+        veiculo.setObservacao(" Esta é a nova observação de veiculo2!");
+        System.out.println("Nova Observaçao: " + veiculo.getObservacao());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar Veiculo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarTipoVeiculo() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Veiculo veiculo = manager.find(Veiculo.class, 2L);
+
+        System.out.println("Tipo atual: " + veiculo.getTipoveiculo());
+        veiculo.setTipoveiculo(TipoVeiculo.OUTROS);
+        System.out.println("Novo Tipo: " + veiculo.getTipoveiculo());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar Veiculo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarMontadoraVeiculo() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Veiculo veiculo = manager.find(Veiculo.class, 2L);
+
+        System.out.println("Montadora atual: " + veiculo.getMontadora());
+        veiculo.setMontadora(Montadora.GM);
+        System.out.println("Nova Montadora: " + veiculo.getMontadora());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar Veiculo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarModeloVeiculo() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Veiculo veiculo = manager.find(Veiculo.class, 2L);
+
+        System.out.println("Modelo atual: " + veiculo.getModelo());
+        veiculo.setModelo("Celta");
+        System.out.println("Novo Modelo: " + veiculo.getModelo());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar Veiculo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarAnoFabricacaoVeiculo() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Veiculo veiculo = manager.find(Veiculo.class, 2L);
+
+        System.out.println("Ano Fabricacao atual: " + veiculo.getAnoFabricacao());
+        veiculo.setAnoFabricacao(1975);
+        System.out.println("Ano Fabricacao depois: " + veiculo.getAnoFabricacao());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar Veiculo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarPlacaVeiculo() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Veiculo veiculo = manager.find(Veiculo.class, 2L);
+
+        System.out.println("Placa atual: " + veiculo.getPlaca());
+        veiculo.setPlaca("DTS-1975");
+        System.out.println("Placa depois: " + veiculo.getPlaca());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar Veiculo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String AtualizarProprietarioVeiculo() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        Pessoa proprietario = manager.find(Pessoa.class, 5L);
+
+        Veiculo veiculo = manager.find(Veiculo.class, 2L);
+
+        System.out.println("Proprietario atual: " + veiculo.getPropietario());
+        veiculo.setPropietario(proprietario);
+        System.out.println("Proprietario depois: " + veiculo.getPropietario());
+
+        tx.commit();
+
+        try {
+
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar atualizar Veiculo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+        return "Opearação realizada com sucesso!";
+    }
+
+    public String ExcluirVeiculo() {
+        EntityManager manager = conexao.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        long id = 8L;
+
+        try {
+            Veiculo veiculo = manager.find(Veiculo.class, id);
+            manager.remove(veiculo);
+            tx.commit();
+            System.out.println(" Veiculo excluida com sucesso!");
+
+        } catch (Exception e) {
+
+            System.out.println("Este veiculo não pode ser excluido, "
+                    + "pos está vinculada a algum cadastro ou não existe no sistema!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+    }
 }

@@ -115,7 +115,7 @@ public class AgendamentoDAO extends conexao {
         EntityManager manager = conexao.getEntityManager();
 
         SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
-        String userdata = "2018-07-21";
+        String userdata = "2018-07-25";
         Date novadata = data.parse(userdata);
 
         try {
@@ -126,7 +126,7 @@ public class AgendamentoDAO extends conexao {
             List Agendamento = query.getResultList();
 
             if (Agendamento.isEmpty()) {
-                System.out.println("Não há Agendamento cadastrado para este data!");
+                System.out.println("Não há Agendamento cadastrado para esta data!");
             } else {
 
                 for (Object obj : Agendamento) {

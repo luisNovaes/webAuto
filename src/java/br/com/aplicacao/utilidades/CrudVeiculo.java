@@ -19,7 +19,15 @@ public interface CrudVeiculo {
         //dao.salvarVeiculos();
         //dao.buscarTodosVeiculos();
         //dao.buscarVeiculosPorNomeProprietario();
-        dao.buscarVeiculosPelaPlaca();
+        //dao.buscarVeiculosPelaPlaca();
+        dao.AtualizarObservacaoVeiculo();
+        //dao.AtualizarTipoVeiculo();
+        //dao.AtualizarMontadoraVeiculo();
+        //dao.AtualizarModeloVeiculo();
+        //dao.AtualizarAnoFabricacaoVeiculo();
+        //dao.AtualizarPlacaVeiculo();
+        //dao.AtualizarProprietarioVeiculo();
+        //dao.ExcluirVeiculo();
     }
 
 }

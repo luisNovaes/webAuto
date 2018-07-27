@@ -13,12 +13,19 @@ import br.com.aplicacao.daos.PessoaDAO;
  */
 public interface CrudPessoas {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         PessoaDAO dao = new PessoaDAO();
         //dao.salvar();
         //dao.buscarTodos();
         //dao.buscarPorNome();
-        dao.buscarPorCpfCnpj();
+        //dao.buscarPorCpfCnpj();
         //dao.buscarPorRg();
+        //dao.AtualizarPessoaTelefone();
+        //dao.AtualizarPessoaEndereco();
+        //dao.AtualizarPessoaEmail();
+        //dao.AtualizarPessoaCidade();
+        //dao.AtualizarPessoaEstado();
+        //dao.AtualizarPessoaObservacao();
+        dao.ExcluirPessoa();
     }
 }

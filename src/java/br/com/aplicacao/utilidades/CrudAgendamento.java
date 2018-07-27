@@ -19,8 +19,8 @@ public interface CrudAgendamento {
         AgendamentoDAO dao = new AgendamentoDAO();
         //dao.salvar();
         //dao.buscarTodos();
-        //dao.buscarAgendamentoPorData();
-        dao.buscarAgendamentoPorHora();
+        dao.buscarAgendamentoPorData();
+        //dao.buscarAgendamentoPorHora();
 
     }
 

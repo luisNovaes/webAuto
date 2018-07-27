@@ -11,6 +11,7 @@ package br.com.aplicacao.modelos;
  */
 public enum Estado {
 
+    AL,
     BA,
     SP,
     MT,
