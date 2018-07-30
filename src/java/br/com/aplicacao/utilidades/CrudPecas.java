@@ -17,11 +17,11 @@ public interface CrudPecas {
 
         PecasDAO dao = new PecasDAO();
         //dao.salvar();
-        //dao.buscarTodos();
+        dao.buscarTodos();
         //dao.buscarPecaPorNome();
         //dao.buscarPecaPorFabricante();
         //dao.buscarPecaPorModelo();
-        dao.buscarPecaPorValor();
+        //dao.buscarPecaPorValor();
 
     }
 

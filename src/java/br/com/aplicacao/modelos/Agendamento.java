@@ -42,7 +42,7 @@ public class Agendamento implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataAgenda;
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private HoraAgenda horaAgenda;
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valorTotalServico;

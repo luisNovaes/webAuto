@@ -16,7 +16,7 @@ public interface CrudPessoas {
     public static void main(String[] args) throws Exception {
         PessoaDAO dao = new PessoaDAO();
         //dao.salvar();
-        //dao.buscarTodos();
+        dao.buscarTodos();
         //dao.buscarPorNome();
         //dao.buscarPorCpfCnpj();
         //dao.buscarPorRg();
@@ -26,6 +26,6 @@ public interface CrudPessoas {
         //dao.AtualizarPessoaCidade();
         //dao.AtualizarPessoaEstado();
         //dao.AtualizarPessoaObservacao();
-        dao.ExcluirPessoa();
+        //dao.ExcluirPessoa();
     }
 }

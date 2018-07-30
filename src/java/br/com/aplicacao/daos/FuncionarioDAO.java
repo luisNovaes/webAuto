@@ -38,18 +38,18 @@ public class FuncionarioDAO extends conexao {
 
         try {
 
-            Pessoa pessoa = manager.find(Pessoa.class, 4L);
+            Pessoa pessoa = manager.find(Pessoa.class, 1L);
 
             Funcionario funcionario = new Funcionario();
 
-            funcionario.setFuncao(Funcao.GERENTE);
-            funcionario.setEspecialidade(Especialidade.MECATRÔNICA);
-            funcionario.setEscolaridade(Escolaridade.PÓS_GRADUADO);
+            funcionario.setFuncao(Funcao.MECÂNICO);
+            funcionario.setEspecialidade(Especialidade.MECÂNICA);
+            funcionario.setEscolaridade(Escolaridade.NÍVEL_MÉDIO);
             funcionario.setDataAdminissao(new Date());
             funcionario.setDataDemissao(new Date());
-            funcionario.setFilial(Filial.CUIABÁ);
-            funcionario.setSetor(Setor.SUPERVISAO);
-            funcionario.setTurno(Turno.ADM);
+            funcionario.setFilial(Filial.PRIMAVERA);
+            funcionario.setSetor(Setor.OFICINA);
+            funcionario.setTurno(Turno.MANHÃ);
             funcionario.setPessoa(pessoa);
 
             manager.persist(funcionario);

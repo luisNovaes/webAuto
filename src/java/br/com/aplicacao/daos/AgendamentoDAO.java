@@ -39,15 +39,15 @@ public class AgendamentoDAO extends conexao {
 
         try {
 
-            Funcionario funcionario = manager.find(Funcionario.class, 5L);
-            Pecas pecas = manager.find(Pecas.class, 3L);
-            Veiculo veiculo = manager.find(Veiculo.class, 3L);
+            Funcionario funcionario = manager.find(Funcionario.class, 1L);
+            Pecas pecas = manager.find(Pecas.class, 2L);
+            Veiculo veiculo = manager.find(Veiculo.class, 1L);
 
             Agendamento agenda = new Agendamento();
 
             agenda.setVeiculo(veiculo);
             agenda.setDataAgenda(new Date());
-            agenda.setHoraAgenda(HoraAgenda.manha);
+            agenda.setHoraAgenda(HoraAgenda.VINTE_HORAS);
             agenda.setFuncionarios(funcionario);
             agenda.setPecas(pecas);
             agenda.setTipoServico(TipoServico.LIMPEZA);
@@ -87,6 +87,10 @@ public class AgendamentoDAO extends conexao {
                 System.out.println(a.getDataAgenda() + " - "
                         + a.getHoraAgenda() + " - "
                         + a.getVeiculo().getPlaca() + " - "
+                        + a.getVeiculo().getMontadora() + " - "
+                        + a.getVeiculo().getModelo() + " - "
+                        + a.getVeiculo().getTipoveiculo() + " - "
+                        + a.getVeiculo().getObservacao() + " - "
                         + a.getVeiculo().getPropietario().getNome() + " - "
                         + a.getVeiculo().getPropietario().getCpf_cnpj() + " - "
                         + a.getVeiculo().getPropietario().getTelefone() + " - "
@@ -115,7 +119,7 @@ public class AgendamentoDAO extends conexao {
         EntityManager manager = conexao.getEntityManager();
 
         SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
-        String userdata = "2018-07-25";
+        String userdata = "2018-07-30";
         Date novadata = data.parse(userdata);
 
         try {
@@ -134,6 +138,10 @@ public class AgendamentoDAO extends conexao {
                     System.out.println(a.getDataAgenda() + " - "
                             + a.getHoraAgenda() + " - "
                             + a.getVeiculo().getPlaca() + " - "
+                            + a.getVeiculo().getMontadora() + " - "
+                            + a.getVeiculo().getModelo() + " - "
+                            + a.getVeiculo().getTipoveiculo() + " - "
+                            + a.getVeiculo().getObservacao() + " - "
                             + a.getVeiculo().getPropietario().getNome() + " - "
                             + a.getVeiculo().getPropietario().getCpf_cnpj() + " - "
                             + a.getVeiculo().getPropietario().getTelefone() + " - "
@@ -170,7 +178,7 @@ public class AgendamentoDAO extends conexao {
             Query query = manager.createQuery(
                     " from Agendamento where horaAgenda = :horaAgenda");
 
-            query.setParameter("horaAgenda", HoraAgenda.noite);
+            query.setParameter("horaAgenda", HoraAgenda.OITO_HORAS);
             List Agendamento = query.getResultList();
 
             if (Agendamento.isEmpty()) {
@@ -182,6 +190,10 @@ public class AgendamentoDAO extends conexao {
                     System.out.println(a.getDataAgenda() + " - "
                             + a.getHoraAgenda() + " - "
                             + a.getVeiculo().getPlaca() + " - "
+                            + a.getVeiculo().getMontadora() + " - "
+                            + a.getVeiculo().getModelo() + " - "
+                            + a.getVeiculo().getTipoveiculo() + " - "
+                            + a.getVeiculo().getObservacao() + " - "
                             + a.getVeiculo().getPropietario().getNome() + " - "
                             + a.getVeiculo().getPropietario().getCpf_cnpj() + " - "
                             + a.getVeiculo().getPropietario().getTelefone() + " - "
@@ -191,6 +203,57 @@ public class AgendamentoDAO extends conexao {
                             + a.getPecas().getNome() + " - "
                             + a.getValorTotalServico() + " - "
                             + a.getObservacao().toUpperCase());
+
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro (" + e.getMessage()
+                    + ") ao tentar buscar Veículo!");
+
+        } finally {
+            manager.close();
+            conexao.close();
+        }
+
+        return "Operação realizada com sucesso!";
+
+    }
+
+    public String buscarAgendamentoPelaPlaca() throws ParseException {
+        EntityManager manager = conexao.getEntityManager();
+
+        try {
+            Query query = manager.createQuery(
+                    " from Agendamento where veiculo.placa = :placa");
+
+            query.setParameter("placa", "WTR-8569");
+            List Agendamento = query.getResultList();
+
+            if (Agendamento.isEmpty()) {
+                System.out.println("Não há Agendamento cadastrado com esta placa de veículo!");
+            } else {
+
+                for (Object obj : Agendamento) {
+                    Agendamento a = (Agendamento) obj;
+                    System.out.println(a.getDataAgenda() + " - "
+                            + a.getHoraAgenda() + " - "
+                            + a.getVeiculo().getPlaca() + " - "
+                            + a.getVeiculo().getMontadora() + " - "
+                            + a.getVeiculo().getModelo() + " - "
+                            + a.getVeiculo().getTipoveiculo() + " - "
+                            + a.getVeiculo().getObservacao() + " - "
+                            + a.getVeiculo().getPropietario().getNome() + " - "
+                            + a.getVeiculo().getPropietario().getCpf_cnpj() + " - "
+                            + a.getVeiculo().getPropietario().getTelefone() + " - "
+                            + a.getVeiculo().getPropietario().getEmail() + " - "
+                            + a.getVeiculo().getPropietario().getObservacao() + " - "
+                            + a.getTipoServico() + " - "
+                            + a.getFuncionarios().getPessoa().getNome() + " - "
+                            + a.getPecas().getNome() + " - "
+                            + a.getValorTotalServico() + " - "
+                            + a.getObservacao().toUpperCase());
+
                 }
             }
 

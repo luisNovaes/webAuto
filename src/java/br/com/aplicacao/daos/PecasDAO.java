@@ -34,7 +34,7 @@ public class PecasDAO extends conexao {
             Agendamento agendamento = manager.find(Agendamento.class, 1L);
 
             Pecas pecas = new Pecas();
-            pecas.setNome("Jogo Velas");
+            pecas.setNome("Farol dianteriro");
             pecas.setModelo("45AC");
             pecas.setFabricante("Moura");
             pecas.setValorPeca(new BigDecimal(100));

@@ -17,10 +17,10 @@ public interface CrudVeiculo {
 
         VeiculoDAO dao = new VeiculoDAO();
         //dao.salvarVeiculos();
-        //dao.buscarTodosVeiculos();
+        dao.buscarTodosVeiculos();
         //dao.buscarVeiculosPorNomeProprietario();
         //dao.buscarVeiculosPelaPlaca();
-        dao.AtualizarObservacaoVeiculo();
+        //dao.AtualizarObservacaoVeiculo();
         //dao.AtualizarTipoVeiculo();
         //dao.AtualizarMontadoraVeiculo();
         //dao.AtualizarModeloVeiculo();

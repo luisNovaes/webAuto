@@ -33,16 +33,16 @@ public class VeiculoDAO extends conexao {
 
         try {
 
-            Pessoa proprietario = manager.find(Pessoa.class, 2L);
+            Pessoa proprietario = manager.find(Pessoa.class, 3L);
 
             Veiculo veiculo = new Veiculo();
             veiculo.setPropietario(proprietario);
-            veiculo.setPlaca("DAF-4534");
-            veiculo.setTipoveiculo(TipoVeiculo.FROTISTA);
-            veiculo.setMontadora(Montadora.VOLKSWAGEM);
-            veiculo.setModelo("Gol");
-            veiculo.setAnoFabricacao(2012);
-            veiculo.setObservacao("Veiculo em garantia de serviço");
+            veiculo.setPlaca("WTR-8569");
+            veiculo.setTipoveiculo(TipoVeiculo.OUTROS);
+            veiculo.setMontadora(Montadora.GM);
+            veiculo.setModelo("Celta");
+            veiculo.setAnoFabricacao(2008);
+            veiculo.setObservacao("Veiculo Chegou rebocado com problema elétrico");
 
             manager.persist(veiculo);
             tx.commit();
@@ -85,8 +85,8 @@ public class VeiculoDAO extends conexao {
                         + v.getPropietario().getRg() + " - "
                         + v.getPropietario().getCpf_cnpj() + " - "
                         + v.getPropietario().getTelefone() + " - "
-                        + v.getAgendamento().getDataAgenda() + " - "
-                        + v.getAgendamento().getHoraAgenda() + " - "
+                        //                        + v.getAgendamento().getDataAgenda() + " - "
+                        //                        + v.getAgendamento().getHoraAgenda() + " - "
                         + v.getObservacao());
             }
 
@@ -109,7 +109,7 @@ public class VeiculoDAO extends conexao {
             Query query = manager.createQuery(
                     " from Veiculo where propietario.nome = :propietario");
 
-            query.setParameter("propietario", "Kawan");
+            query.setParameter("propietario", "Alana");
             List veiculos = query.getResultList();
 
             if (veiculos.isEmpty()) {

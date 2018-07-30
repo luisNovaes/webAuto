@@ -12,7 +12,7 @@ package br.com.aplicacao.modelos;
 public enum Setor {
 
     OFICINA,
-    ATEBDIMENTO,
+    ATENDIMENTO,
     ADMINISTRATIVO,
     CAMPO,
     VENDAS,
