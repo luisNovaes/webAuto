@@ -24,7 +24,7 @@ import javax.persistence.Table;
 @Table(name = "pecas")
 public class Pecas implements Serializable {
 
-    //private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPeca;

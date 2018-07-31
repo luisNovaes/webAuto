@@ -16,8 +16,8 @@ public interface CrudPecas {
     public static void main(String[] args) {
 
         PecasDAO dao = new PecasDAO();
-        //dao.salvar();
-        dao.buscarTodos();
+        dao.salvar();
+        //dao.buscarTodos();
         //dao.buscarPecaPorNome();
         //dao.buscarPecaPorFabricante();
         //dao.buscarPecaPorModelo();

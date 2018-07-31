@@ -16,11 +16,11 @@ public interface CrudFatura {
     public static void main(String[] args) {
 
         FaturaDAO dao = new FaturaDAO();
-        //dao.salvar();
+        dao.salvar();
         //dao.buscarTodos();
         //dao.buscarFaturaPelaOS();
         //dao.buscarFaturaPelaStatusPG();
-        dao.buscarFaturaValorDoc();
+        //dao.buscarFaturaValorDoc();
     }
 
 }

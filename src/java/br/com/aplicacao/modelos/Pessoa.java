@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 @Table(name = "pessoa")
 public class Pessoa implements Serializable {
 
-    //private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPessoa;
